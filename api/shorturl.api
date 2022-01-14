@@ -1,0 +1,36 @@
+syntax = "v1"
+
+info(
+	title: // TODO: add title
+	desc: // TODO: add description
+	author: "aofa"
+	email: "3066937@qq.com"
+)
+
+type expandReq {
+	Shorten string `form:"shorten"`
+}
+
+type expandResp {
+	Url string `json:"url"`
+}
+
+type shortenReq {
+	Url string `form:"url"`
+}
+
+type shortenResp {
+	Shorten string `json:"shorten"`
+}
+
+service shorturl-api {
+	@server(
+		handler: ShortenHandler
+	)
+	get /shorten(shortenReq) returns(shortenResp)
+	
+	@server(
+		handler: ExpandHandler
+	)
+	get /expand(expandReq) returns(expandResp)
+}
